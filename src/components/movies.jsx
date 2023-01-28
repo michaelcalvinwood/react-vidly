@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { getMovies } from '../services/fakeMovieService';
+import Pagination from './pagination';
+import Like from './common/like';
 
 class Movies extends Component {
     state = { 
-        movies: getMovies()
+        movies: getMovies(),
+        pageSize: 4
     } 
 
     handleDelete = movie => {
-        // const movies = this.state.movies.filter(m => m._id !== movie._id);
-        // this.setState({movies});
+        const movies = this.state.movies.filter(m => m._id !== movie._id);
+        this.setState({movies});
+    }
+
+    handlePageChange = page => {
+        console.log('page');
     }
 
     render() { 
@@ -26,6 +33,7 @@ class Movies extends Component {
                             <th>Stock</th>
                             <th>Rate</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,12 +44,16 @@ class Movies extends Component {
                             <td>{movie.numberInStock}</td>
                             <td>{movie.dailyRentalRate}</td>
                             <td>
+                                <Like />
+                            </td>
+                            <td>
                                 <button onClick={() => this.handleDelete(movie)} className="btn btn-danger btn-sm">DELETE</button>
                             </td>
                         </tr>
                         ))}
                     </tbody>
                 </table>
+                <Pagination itemsCount={count} pageSize={this.state.pageSize} onPageChange={this.handlePageChange}/>
             </>)
     }
 }
