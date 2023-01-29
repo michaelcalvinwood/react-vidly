@@ -1,9 +1,18 @@
 import React from 'react';
 
 const ListGroup = ({items, onItemsSelect, textProperty, valueProperty}) => {
+    console.log('onItemsSelect', typeof onItemsSelect, onItemsSelect)
     return ( 
         <ul className="list-group">
-            {items.map(item => <li key={item[valueProperty]} className="list-group-item">{item[textProperty]}</li>)}
+            {items.map(item => (
+            <li 
+                key={item[valueProperty]} 
+                className="list-group-item"
+                onClick={() => onItemsSelect(item[valueProperty])}
+                style={{cursor: 'pointer'}}
+            >
+                {item[textProperty]}
+            </li>))}
         </ul>
     );
 }
