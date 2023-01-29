@@ -63,6 +63,7 @@ class Movies extends Component {
                         items={this.state.genres} 
                         onItemsSelect={this.handleGenreSelect}
                         selected={genreId}
+                        nullItem="All Genres"
                     />
                 </div>
                 <div className="col" id="rightColumn">
