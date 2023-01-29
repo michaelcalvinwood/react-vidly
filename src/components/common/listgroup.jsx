@@ -7,5 +7,10 @@ const ListGroup = ({items, onItemsSelect, textProperty, valueProperty}) => {
         </ul>
     );
 }
- 
+
+ListGroup.defaultProps = {
+    textProperty: 'name',
+    valueProperty: '_id'
+}
+
 export default ListGroup;
