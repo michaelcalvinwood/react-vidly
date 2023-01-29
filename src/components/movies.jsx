@@ -5,6 +5,7 @@ import Pagination from './common/pagination';
 import Like from './common/like';
 import { paginate } from '../utils/paginate';
 import ListGroup from './common/listgroup';
+import MoviesTable from './moviesTable';
 
 class Movies extends Component {
     state = { 
@@ -68,34 +69,11 @@ class Movies extends Component {
                 </div>
                 <div className="col" id="rightColumn">
                     <p>Showing {count} movies in the database.</p>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Genre</th>
-                                <th>Stock</th>
-                                <th>Rate</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { moviePage.map(movie => (
-                            <tr key={movie._id}>
-                                <td>{movie.title}</td>
-                                <td>{movie.genre.name}</td>
-                                <td>{movie.numberInStock}</td>
-                                <td>{movie.dailyRentalRate}</td>
-                                <td>
-                                    <Like liked={movie.liked} onClick={() => this.handleLike(movie)}/>
-                                </td>
-                                <td>
-                                    <button onClick={() => this.handleDelete(movie)} className="btn btn-danger btn-sm">DELETE</button>
-                                </td>
-                            </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <MoviesTable 
+                        moviePage={moviePage}
+                        handleLike={this.handleLike}
+                        handleDelete={this.handleDelete}
+                    />
                     <Pagination 
                         itemsCount={count} 
                         pageSize={pageSize} 
